@@ -19,6 +19,9 @@ jobs:
         with:
           channel: stable
 
+      - name: Generer les dossiers Android et iOS
+        run: flutter create . --platforms=android,ios
+
       - name: Installer les dependances
         run: flutter pub get
 
