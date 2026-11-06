@@ -1,0 +1,33 @@
+
+name: Construire Faso Gestion
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Installer les dependances
+        run: flutter pub get
+
+      - name: Construire APK
+        run: flutter build apk --release
+
+      - name: Publier APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Faso-Gestion-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+          
